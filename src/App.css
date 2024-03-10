@@ -3,3 +3,16 @@
   margin: 0 auto;
   padding: 0;
 }
+
+.AuthLayout {
+  width: 100%;
+  max-width: 400px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.CompanyLogo {
+  margin-bottom: 80px;
+}
