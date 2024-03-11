@@ -6,9 +6,13 @@ type Props = {
   type?: string;
   placeholder?: string;
   label?: string;
+  name: string;
+  error: string;
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-const Input = ({ type = "text", label, placeholder }: Props) => {
+const Input = ({ type = "text", name, error, value, onChange, label, placeholder }: Props) => {
   const uuid = useId();
   const [visible, setVisible] = useState(false);
 
@@ -27,11 +31,17 @@ const Input = ({ type = "text", label, placeholder }: Props) => {
       <div className="relative">
         <input
           id={uuid}
+          name={name}
+          value={value}
+          onChange={onChange}
           type={type === "password" && visible ? "text" : type}
-          className="bg-white border border-[#D3D8DC] text-gray-900 text-sm rounded-md block w-full px-3 py-[14px] placeholder:text-[#A1ABB5]"
+          className={`bg-white border border-[#D3D8DC] text-gray-900 focus:ring-inset focus:outline-none text-sm rounded-md block w-full px-3 py-[14px] placeholder:text-[#A1ABB5] ${
+            error && "border-red-500"
+          }`}
           placeholder={placeholder}
           required
         />
+        <span className="text-red-500 text-sm absolute bottom-[-20px]">{error}</span>
 
         {type === "password" && (
           <div
